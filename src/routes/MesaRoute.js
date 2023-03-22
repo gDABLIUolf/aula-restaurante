@@ -22,15 +22,14 @@ router.post("/mesa", async (req, res) => {
     }
 })
 
-router.delete("/mesa/:numero", (req, res) => {
+router.delete("/mesa/:numero", async (req, res) => {
     const numero = req.params.numero;
-    const index = DB_MESAS.findIndex(mesa => mesa.numero == numero)
+    const deletado = await MesaModel.findOneAndDelete({ numero: numero })
 
-    if (index != -1) {
-        DB_MESAS.splice(index, 1)
-        return res.status(200).send("Mesa deletada com sucesso")
+    if (!deletado || !deletado._id) {
+        return res.status(404).send("Mesa não encontrada")
     }
-    return res.status(404).send("Mesa não encontrada")
+    return res.status(200).send(deletado)
 })
 
 module.exports = router
