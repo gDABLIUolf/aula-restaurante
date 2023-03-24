@@ -6,7 +6,7 @@ const PratoSchema = new mongoose.Schema({
     descricao: String,
     info: Object,
     imagem: String
-})
+}, { timestamps: true })
 
 const PratoModel = mongoose.model("Prato", PratoSchema)
 

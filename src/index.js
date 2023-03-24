@@ -16,6 +16,10 @@ app.use(MesaRoute)
 const AtendenteRoute = require("./routes/AtendenteRoutes")
 app.use(AtendenteRoute)
 
+// ROTAS - atendente
+const pratoRoute = require("./routes/PratoRoutes")
+app.use(pratoRoute)
+
 const carregarModels = require("./models/index")
 carregarModels()
 

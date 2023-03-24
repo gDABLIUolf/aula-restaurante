@@ -1,5 +1,4 @@
 const express = require('express')
-const DB_MESAS = require('./../database/MesaDB')
 const router = express.Router()
 const MesaModel = require("./../models/MesaModel.js")
 
