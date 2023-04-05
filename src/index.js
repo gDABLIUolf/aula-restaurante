@@ -20,8 +20,17 @@ app.use(AtendenteRoute)
 const pratoRoute = require("./routes/PratoRoutes")
 app.use(pratoRoute)
 
+// ROTAS - pedido
+const pedidoRoute = require("./routes/PedidoRoutes")
+app.use(pedidoRoute)
+
+const TokenRoute = require("./routes/TokenRoute")
+app.use(TokenRoute)
+
 const carregarModels = require("./models/index")
 carregarModels()
+
+app.use("/uploads", express.static("uploads"))
 
 app.listen(3000, () => {
     console.log('Api Rodando')

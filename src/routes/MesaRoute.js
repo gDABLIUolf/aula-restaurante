@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const autenticar = require("../middleware/Autenticador")
 const MesaModel = require("./../models/MesaModel.js")
 
-router.get('/mesa', async (req, res) => {
+router.get('/mesa', autenticar(["ADM", "GERENTE"]), async (req, res) => {
     const mesas = await MesaModel.find()
     return res.status(200).send(mesas)
 })
 
-router.post("/mesa", async (req, res) => {
+router.post("/mesa", autenticar(["ADM", "GERENTE"]), async (req, res) => {
     try {
         const mesaCriada = await MesaModel.create({
             numero: req.body.numero
@@ -21,7 +22,7 @@ router.post("/mesa", async (req, res) => {
     }
 })
 
-router.delete("/mesa/:numero", async (req, res) => {
+router.delete("/mesa/:numero", autenticar(["ADM", "GERENTE"]), async (req, res) => {
     const numero = req.params.numero;
     const deletado = await MesaModel.findOneAndDelete({ numero: numero })
 
